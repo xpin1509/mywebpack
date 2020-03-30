@@ -8,13 +8,14 @@
     "dll": "webpack --progress --config webpack.dll.config.js",
     "dist": "webpack --mode=production",
     "build": "webpack --mode=production",
-    "analyz": "NODE_ENV=production npm_config_report=true npm run build"
+    "analyz": "cross-env NODE_ENV=production npm_config_report=true npm run build"
   },
   "author": "xpin_1509@163.com",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.1",
     "clean-webpack-plugin": "^3.0.0",
+    "cross-env": "^7.0.2",
     "css-loader": "^3.4.2",
     "element-ui": "^2.13.0",
     "file-loader": "^5.0.2",

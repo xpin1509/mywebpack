@@ -1,13 +1,14 @@
 const path = require('path')
+const webpack = require('webpack')
+const rimraf = require('rimraf')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const { CleanWebpackPlugin } = require("clean-webpack-plugin")
-const webpack = require('webpack')
+// const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const rimraf = require('rimraf');
-rimraf('./dist/static', err => { // 删除当前目录下的 test.txt
-  console.log(err)
-});
+rimraf('./dist/static', err => { 
+    // 删除当前目录下的 test.txt
+    console.log(err)
+})
 const config = {
     entry: './main.js',
     output: {
@@ -43,8 +44,6 @@ const config = {
     },
     plugins: [
         new VueLoaderPlugin(),
-        // new CleanWebpackPlugin({
-        // }),
         new HtmlWebpackPlugin({
             template: './public/index.html'
         }),
@@ -54,10 +53,10 @@ const config = {
         })
     ],
 }
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.npm_config_report) {
     config.plugins.push(
         new BundleAnalyzerPlugin({
-            openAnalyzer: false
+            openAnalyzer: true
         })
     )
   }

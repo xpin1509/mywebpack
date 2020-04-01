@@ -7,6 +7,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 var DashboardPlugin = require("webpack-dashboard/plugin")
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 rimraf('./dist/static', err => { 
     // 删除当前目录下的 test.txt
     console.log(err)
@@ -15,7 +16,7 @@ const config = {
     entry: './main.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'static/[name].[hash].js'
+        filename: 'static/js/[name].[hash].js'
     },
     module: {
         rules: [
@@ -29,6 +30,7 @@ const config = {
             {
                 test: /\.vue$/,
                 use: [
+                    'cache-loader',
                     'vue-loader'
                 ]
             },
@@ -37,19 +39,31 @@ const config = {
                 loader: 'file-loader'
             },
             {
-                test: /\.(png|svg|jpg|gif)$/,
+                test: /\.(png|jpe?g|gif|webp)(\?.*)?$/,
                 use: [
-                    'file-loader'
+                  {
+                    loader: 'url-loader',
+                    options: {
+                      limit: 4096,
+                      fallback: {
+                        loader: 'file-loader',
+                        options: {
+                          name: 'static/img/[name].[hash:8].[ext]'
+                        }
+                      }
+                    }
+                  }
                 ]
-            }
+              },
         ]
     },
     devServer: {
         contentBase: path.join(__dirname, "dist"),
         compress: true,
         hot: true,
-        port: 9000
+        port: 9000,
     },
+    // devtool: 'cheap-module-eval-source-map',
     plugins: [
         new VueLoaderPlugin(),
         new HtmlWebpackPlugin({
@@ -59,6 +73,9 @@ const config = {
             context: __dirname,
             manifest: require('./dist/dll/manifest.json')
         }),
+        // new ExtractTextPlugin({
+        //     filename: '[name]'
+        // }),
         // new webpack.optimize.splitChunks({
         //     name: 'common' // 指定公共 bundle 的名称。
         // })

@@ -1,10 +1,15 @@
 <template>
     <div>
-        <img src="./image.png" alt="logo">
+        <img src="static/img/image.png" alt="logo">
+        <img src="../../assets/logo.png" alt="end">
+        <img src="../../assets/through.png" alt="through">
         <span style="color: red">{{ message }}</span>
         <div class="green">{{this.$store.state.count}}</div>
         <el-button @click="clickHandle">点击</el-button>
         <div class="imgbox"></div>
+        <div class="imgbox2"></div>
+        ---------
+        {{message2}}
     </div>
 </template>
 <script>
@@ -15,6 +20,11 @@ export default {
     data () {
         return {
             message: 'Hello Index!'
+        }
+    },
+    computed: {
+        message2() {
+            return `${this.message}hahah`
         }
     },
     mounted () {
@@ -37,6 +47,11 @@ export default {
 }
 .imgbox{
     background: url('../../assets/image.png');
+    height: 100px;
+    width: 100px;
+}
+.imgbox2{
+    background: url('../../assets/end.png');
     height: 100px;
     width: 100px;
 }

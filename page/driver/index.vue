@@ -4,11 +4,24 @@
     </div>
 </template>
 <script>
-    export default {
-        data () {
-            return {
-                message: 'Hello Driver!'
-            }
+import _ from '../../lib/lodash.js'
+import NP from '../../lib/np.js'
+import vuedraggable from 'vuedraggable'
+export default {
+    data () {
+        return {
+            message: 'Hello Driver!'
         }
+    },
+    mounted () {
+        var array = [1]
+        var other = _.concat(array, 2, [3], [[4]])
+        console.log(other)
+        console.log(NP.times(0.2, 0.1))
+        var array = [1, 2, 3];
+ 
+        _.fill(array, 'a');
+        console.log(array);
     }
+}
 </script>

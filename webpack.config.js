@@ -8,12 +8,11 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 var DashboardPlugin = require("webpack-dashboard/plugin")
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-rimraf('./dist/static', err => { 
-    // 删除当前目录下的 test.txt
+rimraf('./dist', err => { 
     console.log(err)
 })
 const config = {
-    entry: './main.js',
+    entry: './src/main.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'static/js/[name].[hash].js'
@@ -45,10 +44,12 @@ const config = {
                     loader: 'url-loader',
                     options: {
                       limit: 4096,
+                      esModule: false,
                       fallback: {
                         loader: 'file-loader',
                         options: {
-                          name: 'static/img/[name].[hash:8].[ext]'
+                            esModule: false,
+                            name: 'static/img/[name].[hash:8].[ext]'
                         }
                       }
                     }
@@ -62,6 +63,7 @@ const config = {
         compress: true,
         hot: true,
         port: 9000,
+        // publicPath: '/assets/'
     },
     // devtool: 'cheap-module-eval-source-map',
     plugins: [
@@ -69,10 +71,10 @@ const config = {
         new HtmlWebpackPlugin({
             template: './public/index.html'
         }),
-        new webpack.DllReferencePlugin({
-            context: __dirname,
-            manifest: require('./dist/dll/manifest.json')
-        }),
+        // new webpack.DllReferencePlugin({
+        //     context: __dirname,
+        //     manifest: require('./dist/dll/manifest.json')
+        // }),
         // new ExtractTextPlugin({
         //     filename: '[name]'
         // }),

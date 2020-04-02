@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img src="static/img/image.png" alt="logo">
+        <img src="../../assets/image.png" alt="image">
         <img src="../../assets/logo.png" alt="end">
         <img src="../../assets/through.png" alt="through">
         <span style="color: red">{{ message }}</span>
@@ -32,7 +32,6 @@ export default {
         var other = _.concat(array, 2, [[4]])
         console.log(other)
         console.log(NP.plus(0.2, 0.1))
-        console.log(require('../../assets/image.png'))
     },
     methods: {
         clickHandle () {

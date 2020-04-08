@@ -1,6 +1,7 @@
 <template>
     <div class="shaking">
         {{ message }}
+        {{sum}}
     </div>
 </template>
 <script>

@@ -7,7 +7,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 var DashboardPlugin = require("webpack-dashboard/plugin")
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const ExtractTextPlugin = require("extract-text-webpack-plugin")
+const Server = require('axios')
 rimraf('./dist', err => { 
     console.log(err)
 })
@@ -42,11 +43,25 @@ MyExampleWebpackPlugin.prototype.apply = function(compiler) {
             });
         });
     }
-    getdirsize('./dist', (err, size) => {
+    getdirsize('./dist', async (err, size) => {
         const kbSize = parseInt(size / 1024, 10)
         // 钉钉通知
         // 关键词
-        // https://oapi.dingtalk.com/robot/send?access_token=37cd51e9f1f37f2674216bc73d47aa600ec8fe28330b5624dc8c275419820ced
+        try {
+            var os = require('os')
+            const userName = os.userInfo().username
+            const { data } = await Server({
+                url: 'https://oapi.dingtalk.com/robot/send?access_token=37cd51e9f1f37f2674216bc73d47aa600ec8fe28330b5624dc8c275419820ced',
+                method: "POST",
+                data: {
+                    "msgtype": "text", 
+                    "text": {
+                        "content": `构建大小: ${kbSize}kb\n用户信息: ${userName}\n构建时间: ${new Date().getHours()}:${new Date().getMinutes()}\n构建环境:`
+                    }
+                }
+            })
+        } catch (err) {
+        }
     })
   })
 };
@@ -108,10 +123,10 @@ const config = {
     // devtool: 'cheap-module-eval-source-map',
     plugins: [
         new VueLoaderPlugin(),
+        new MyExampleWebpackPlugin(),
         new HtmlWebpackPlugin({
             template: './public/index.html'
         }),
-        new MyExampleWebpackPlugin()
         // new webpack.DllReferencePlugin({
         //     context: __dirname,
         //     manifest: require('./dist/dll/manifest.json')

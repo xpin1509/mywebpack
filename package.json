@@ -12,8 +12,9 @@
   },
   "author": "xpin_1509@163.com",
   "license": "ISC",
+  "sideEffects": false,
   "dependencies": {
-    "axios": "^0.19.1",
+    "axios": "^0.19.2",
     "clean-webpack-plugin": "^3.0.0",
     "cross-env": "^7.0.2",
     "css-loader": "^3.4.2",

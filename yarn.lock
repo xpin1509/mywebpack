@@ -493,10 +493,10 @@ atob@^2.1.1:
   resolved "http://192.168.199.131:4873/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha1-bZUX654DDSQ2ZmZR6GvZ9vE1M8k=
 
-axios@^0.19.1:
-  version "0.19.1"
-  resolved "http://192.168.199.131:4873/axios/-/axios-0.19.1.tgz#8a6a04eed23dfe72747e1dd43c604b8f1677b5aa"
-  integrity sha1-imoE7tI9/nJ0fh3UPGBLjxZ3tao=
+axios@^0.19.2:
+  version "0.19.2"
+  resolved "http://npm.amh-group.com/axios/-/axios-0.19.2.tgz#3ea36c5d8818d0d5f8a8a97a6d36b86cdc00cb27"
+  integrity sha1-PqNsXYgY0NX4qKl6bTa4bNwAyyc=
   dependencies:
     follow-redirects "1.5.10"
 

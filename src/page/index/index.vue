@@ -10,12 +10,15 @@
         <div class="imgbox2"></div>
         ---------
         {{message2}}
+        <Child @emit-handle="emitHandle"/>
     </div>
 </template>
 <script>
 import _ from 'lodash'
 import NP from '../../lib/np.js'
 import vuedraggable from 'vuedraggable'
+import Child from './components/Child.vue'
+import { queryctrlWorkbenchDriverInfo } from '../../lib/dataApi'
 export default {
     data () {
         return {
@@ -27,6 +30,9 @@ export default {
             return `${this.message}hahah`
         }
     },
+    components: {
+        Child
+    },
     mounted () {
         var array = [1]
         var other = _.concat(array, 2, [[4]])
@@ -36,6 +42,9 @@ export default {
     methods: {
         clickHandle () {
             console.log('hahsad')
+        },
+        async emitHandle () {
+            await queryctrlWorkbenchDriverInfo()
         }
     }
 }

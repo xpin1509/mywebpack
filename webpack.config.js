@@ -21,6 +21,7 @@ const config = {
         rules: [
             {
                 test: /\.css$/,
+                sideEffects: true,
                 use: [
                     'style-loader',
                     'css-loader'

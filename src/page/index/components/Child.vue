@@ -4,15 +4,14 @@
     </div>
 </template>
 <script>
-import { queryctrlWorkbenchContract } from '../../lib/dataApi'
 export default {
     data () {
         return {
             message: 'Hello drag!'
         }
     },
-    async mounted () {
-        await queryctrlWorkbenchContract()
+    beforeCreate () {
+        console.log(this.$listeners, this.$attrs)
     }
 }
 </script>

@@ -6,7 +6,7 @@
 </template>
 <script>
 import axios from 'axios'
-import {orderCard} from '../../lib/dataApi'
+// import {orderCard} from '../../lib/dataApi'
 import './index.css'
 export default {
     data () {
@@ -21,8 +21,8 @@ export default {
     methods: {
         async add() {
         //    this.sum = cube(20) + cube(30) + cube(40)
-            const { data } = await orderCard()
-            console.log(data.data)
+            // const { data } = await orderCard()
+            // console.log(data.data)
         }
     }
 }

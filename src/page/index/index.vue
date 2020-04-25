@@ -18,7 +18,7 @@ import _ from 'lodash'
 import NP from '../../lib/np.js'
 import vuedraggable from 'vuedraggable'
 import Child from './components/Child.vue'
-import { queryctrlWorkbenchDriverInfo } from '../../lib/dataApi'
+// import { queryctrlWorkbenchDriverInfo } from '../../lib/dataApi'
 export default {
     data () {
         return {
@@ -44,7 +44,7 @@ export default {
             console.log('hahsad')
         },
         async emitHandle () {
-            await queryctrlWorkbenchDriverInfo()
+            // await queryctrlWorkbenchDriverInfo()
         }
     }
 }

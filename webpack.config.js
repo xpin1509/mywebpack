@@ -8,7 +8,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 var DashboardPlugin = require("webpack-dashboard/plugin")
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
-const DingtalkMsgPlugin = require('./src/lib/DingtalkMsgPlugin')
+// const DingtalkMsgPlugin = require('./src/lib/DingtalkMsgPlugin')
 rimraf('./dist', err => { 
     console.log(err)
 })
@@ -71,10 +71,10 @@ const config = {
     // devtool: 'cheap-module-eval-source-map',
     plugins: [
         new VueLoaderPlugin(),
-        new DingtalkMsgPlugin({
-            webhook:'https://oapi.dingtalk.com/robot/send?access_token=37cd51e9f1f37f2674216bc73d47aa600ec8fe28330b5624dc8c275419820ced',
-            secret: 'SECeb093d27575d74b9b04b82fb8a1052f054b570858edf5fd7c12e905cd07a2aeb'
-        }),
+        // new DingtalkMsgPlugin({
+        //     webhook:'https://oapi.dingtalk.com/robot/send?access_token=37cd51e9f1f37f2674216bc73d47aa600ec8fe28330b5624dc8c275419820ced',
+        //     secret: 'SECeb093d27575d74b9b04b82fb8a1052f054b570858edf5fd7c12e905cd07a2aeb'
+        // }),
         new HtmlWebpackPlugin({
             template: './public/index.html'
         }),

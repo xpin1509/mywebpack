@@ -4,7 +4,7 @@
     </div>
 </template>
 <script>
-import { queryctrlWorkbenchContract } from '../../lib/dataApi'
+// import { queryctrlWorkbenchContract } from '../../lib/dataApi'
 export default {
     data () {
         return {
@@ -12,7 +12,7 @@ export default {
         }
     },
     async mounted () {
-        await queryctrlWorkbenchContract()
+        // await queryctrlWorkbenchContract()
     }
 }
 </script>

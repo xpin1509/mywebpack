@@ -1,6 +1,6 @@
 <template>
     <div>
-        <img src="../../assets/image.png" alt="image">
+        <!-- <img src="../../assets/image.png" alt="image">
         <img src="../../assets/logo.png" alt="end">
         <img src="../../assets/through.png" alt="through">
         <span style="color: red">{{ message }}</span>
@@ -10,57 +10,46 @@
         <div class="imgbox2"></div>
         ---------
         {{message2}}
-        <Child @emit-handle="emitHandle"/>
+        <Child @emit-handle="emitHandle"/> -->
     </div>
 </template>
 <script>
-import _ from 'lodash'
-import NP from '../../lib/np.js'
-import vuedraggable from 'vuedraggable'
-import Child from './components/Child.vue'
-// import { queryctrlWorkbenchDriverInfo } from '../../lib/dataApi'
+import {
+	SyncHook,
+	SyncBailHook,
+	SyncWaterfallHook,
+	SyncLoopHook,
+	AsyncParallelHook,
+	AsyncParallelBailHook,
+	AsyncSeriesHook,
+	AsyncSeriesBailHook,
+	AsyncSeriesWaterfallHook
+ } from "tapable/lib/index"
 export default {
-    data () {
-        return {
-            message: 'Hello Index!'
-        }
-    },
-    computed: {
-        message2() {
-            return `${this.message}hahah`
-        }
-    },
-    components: {
-        Child
-    },
     mounted () {
-        var array = [1]
-        var other = _.concat(array, 2, [[4]])
-        console.log(other)
-        console.log(NP.plus(0.2, 0.1))
-    },
-    methods: {
-        clickHandle () {
-            console.log('hahsad')
-        },
-        async emitHandle () {
-            // await queryctrlWorkbenchDriverInfo()
+        class Car {
+            constructor() {
+                this.hooks = {
+                    accelerate: new SyncHook(["newSpeed"]),
+                    brake: new SyncHook(),
+                    calculateRoutes: new AsyncParallelHook(["source", "target", "routesList"])
+                }
+            }
         }
+        const myCar = new Car()
+        myCar.hooks.accelerate.tap("LoggerPlugin", newSpeed => console.log(`Accelerating to ${newSpeed}`));
+        myCar.hooks.accelerate.call('newSpeed');
+        console.log(myCar)
+        console.dir(Car)
+        // const hook1 = new SyncHook(["arg1", "arg2", "arg3"]);
+
+        // //绑定事件到webapck事件流
+        // hook1.tap('111', (arg1, arg2, arg3) => console.log(arg1, arg2, arg3)) //1,2,3
+
+        // //执行绑定的事件
+        // hook1.call(1,2,3)
+
+        // console.log(hook1)
     }
 }
 </script>
-<style scoped>
-.green{
-    color: green;
-}
-.imgbox{
-    background: url('../../assets/image.png');
-    height: 100px;
-    width: 100px;
-}
-.imgbox2{
-    background: url('../../assets/end.png');
-    height: 100px;
-    width: 100px;
-}
-</style>

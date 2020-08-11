@@ -5,10 +5,11 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 // const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-var DashboardPlugin = require("webpack-dashboard/plugin")
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const ExtractTextPlugin = require("extract-text-webpack-plugin")
+// var DashboardPlugin = require("webpack-dashboard/plugin")
+// const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+// const ExtractTextPlugin = require("extract-text-webpack-plugin")
 // const DingtalkMsgPlugin = require('./src/lib/DingtalkMsgPlugin')
+const MyWebpackPlugin = require('./src/lib/MyWebpackPlugin.js')
 rimraf('./dist', err => { 
     console.log(err)
 })
@@ -78,6 +79,7 @@ const config = {
         new HtmlWebpackPlugin({
             template: './public/index.html'
         }),
+        new MyWebpackPlugin()
         // new webpack.DllReferencePlugin({
         //     context: __dirname,
         //     manifest: require('./dist/dll/manifest.json')

@@ -27,20 +27,20 @@ import {
  } from "tapable/lib/index"
 export default {
     mounted () {
-        class Car {
-            constructor() {
-                this.hooks = {
-                    accelerate: new SyncHook(["newSpeed"]),
-                    brake: new SyncHook(),
-                    calculateRoutes: new AsyncParallelHook(["source", "target", "routesList"])
-                }
-            }
-        }
-        const myCar = new Car()
-        myCar.hooks.accelerate.tap("LoggerPlugin", newSpeed => console.log(`Accelerating to ${newSpeed}`));
-        myCar.hooks.accelerate.call('newSpeed');
-        console.log(myCar)
-        console.dir(Car)
+        // class Car {
+        //     constructor() {
+        //         this.hooks = {
+        //             accelerate: new SyncHook(["newSpeed"]),
+        //             brake: new SyncHook(),
+        //             calculateRoutes: new AsyncParallelHook(["source", "target", "routesList"])
+        //         }
+        //     }
+        // }
+        // const myCar = new Car()
+        // myCar.hooks.accelerate.tap("LoggerPlugin", newSpeed => console.log(`Accelerating to ${newSpeed}`));
+        // myCar.hooks.accelerate.call('newSpeed');
+        // console.log(myCar)
+        // console.dir(Car)
         // const hook1 = new SyncHook(["arg1", "arg2", "arg3"]);
 
         // //绑定事件到webapck事件流

@@ -1,30 +1,37 @@
 const path = require('path')
-const webpack = require('webpack')
+// const webpack = require('webpack')
 const rimraf = require('rimraf')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-// const { CleanWebpackPlugin } = require("clean-webpack-plugin")
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const { CleanWebpackPlugin } = require("clean-webpack-plugin")
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 // var DashboardPlugin = require("webpack-dashboard/plugin")
 // const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 // const ExtractTextPlugin = require("extract-text-webpack-plugin")
 // const DingtalkMsgPlugin = require('./src/lib/DingtalkMsgPlugin')
-const MyWebpackPlugin = require('./src/lib/MyWebpackPlugin.js')
-rimraf('./dist', err => { 
-    console.log(err)
-})
+// const MyWebpackPlugin = require('./src/lib/MyWebpackPlugin.js')
+// rimraf('./dist', err => { 
+//     console.log(err)
+// })
 
 const config = {
-    entry: './src/main.js',
+    entry: {
+        main: './src/tree-shaking/treeShake.js',
+        vendor: [
+            'lodash'
+        ]
+    },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: 'static/js/[name].[hash].js'
+        filename: 'static/js/[name].[chunkhash].js',
+        publicPath: '/'
     },
+    devtool: 'source-map',
     module: {
         rules: [
             {
                 test: /\.css$/,
-                sideEffects: true,
+                // sideEffects: true,
                 use: [
                     'style-loader',
                     'css-loader'
@@ -59,7 +66,7 @@ const config = {
                     }
                   }
                 ]
-              },
+            },
         ]
     },
     devServer: {
@@ -79,7 +86,8 @@ const config = {
         new HtmlWebpackPlugin({
             template: './public/index.html'
         }),
-        new MyWebpackPlugin()
+        new CleanWebpackPlugin()
+        // new MyWebpackPlugin()
         // new webpack.DllReferencePlugin({
         //     context: __dirname,
         //     manifest: require('./dist/dll/manifest.json')
@@ -102,11 +110,11 @@ const config = {
         // ],
     ]
 }
-if (process.env.npm_config_report) {
-    config.plugins.push(
-        new BundleAnalyzerPlugin({
-            openAnalyzer: false
-        })
-    )
-}
+// if (process.env.npm_config_report) {
+//     config.plugins.push(
+//         new BundleAnalyzerPlugin({
+//             openAnalyzer: false
+//         })
+//     )
+// }
 module.exports = config

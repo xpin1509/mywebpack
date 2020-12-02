@@ -16,17 +16,17 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 
 const config = {
     entry: {
-        main: './src/tree-shaking/treeShake.js',
-        vendor: [
-            'lodash'
-        ]
+        main: './src/tree-shaking/treeShake.js'
+        // vendor: [
+        //     'lodash'
+        // ]
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'static/js/[name].[chunkhash].js',
         publicPath: '/'
     },
-    devtool: 'source-map',
+    // devtool: 'source-map',
     module: {
         rules: [
             {

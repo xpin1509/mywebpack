@@ -1,7 +1,7 @@
 // import { say } from './a'
 // import Event from '../lib/Event'
 // import './index.css'
-import _ from '../lib/lodash'
+// import _ from '../lib/lodash'
 // import Icon from '../assets/logo.png';
 // import { doSome } from 
 import { cube } from '../lib/math.js';
@@ -41,3 +41,5 @@ function component() {
 }
 
 document.body.appendChild(component())
+
+// eval('alert("hello world")')
